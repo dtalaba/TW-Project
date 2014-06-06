@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Onco</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+
+<section class="main-content">
+	<section class="sidebar">
+		<h1>ONCO</h1>
+		<div class="user">
+			<div class="user-img">
+				<img src="assets/images/no-pic-avatar.png" alt="" />
+			</div> <!-- user-img -->
+			<div class="user-details">
+				<p>Welcome, </p>
+				<span>$nume !</span>
+				<a href="#">Logout</a>
+			</div> <!-- end user-details -->
+		</div> <!-- end user -->
+
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="add-contact.html">Add Contact</a></li>
+		</ul>
+	</section> <!-- end sidebar -->
+	<section class="container">
+		<header>
+			<form method="get" action="/search" id="search">
+			  	<input name="q" type="text" size="40" placeholder="Search..." />
+			</form>
+		</header>
+		<div class="sub-container">
+			<h1>Add Contact</h1>
+			<div class="add-contact">
+			    <form method="post" action="add-contact.html">
+			    	<label for="nume">Nume</label>
+				    	<input type="text" name="nume"/>
+				    <label for="prenume">Prenume</label>
+				   	    <input type="text" name="prenume"/>
+				    <label for="email">Email</label>
+				     	<input type="text" name="email"/>
+				    <label for="telefon">Telefon</label>
+				    	<input type="text" name="telefon"/>
+				    <label for="picture">Picture</label>
+				    	<input type="file" name="picture"/>
+		     		<p class="submit"><input type="submit" name="commit" value="Add"></p>
+			    </form>
+			</div> <!-- end add-contact -->
+
+		</div> <!-- end sub-container -->
+	</section> <!-- end container -->
+</section> <!-- end main-content -->
+
+
+</body>
+</html>
