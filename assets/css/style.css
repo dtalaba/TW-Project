@@ -196,7 +196,10 @@ body{
 				opacity: 1; 
     			filter: alpha(opacity=100);
 			}
-			.contact-element h2{
+			.contact-element a{
+				text-decoration: none;
+			}
+			.contact-element a h2{
 				font-family: OpenSans;
 				color:  #ffffff;
 				font-size: 16px;  
@@ -204,7 +207,7 @@ body{
 				padding-top: 15px;
 				text-align: center;
 			}
-			.contact-element img{
+			.contact-element a img{
 				border-radius: 30px;
 				width:50px;
 				height:50px;	
@@ -213,13 +216,19 @@ body{
 				margin-left: auto;
 				margin-right: auto;
 			}
-			.contact-element p{
+			.contact-element a p{
 				display:block;
 				text-align: left;
 				color:#fff;
 				padding-top: 10px;
 				padding-left: 10px;
 
+			}
+			.contact-element .delete{
+				position: absolute;
+				top: 5px;
+				right: 5px;
+				cursor:pointer;
 			}
 			/***.contact-element button{
 				border-radius:5px;
@@ -234,11 +243,7 @@ body{
 				bottom: 5px;
 				left: 5px;	
 			}
-			.contact-element .delete{
-				position: absolute;
-				bottom: 5px;
-				right: 5px;
-			} ***/
+			 ***/
 
 
 /*** ADD CONTACT ***/
@@ -277,3 +282,11 @@ body{
 .add-contact{
 	margin: 0 auto;
 }
+/* MESSAGES */
+.hidethis { cursor:pointer; }
+.msg-info, .msg-atten, .msg-ok, .msg-error { margin:3px 0; padding:10px 10px 10px 40px; -moz-border-radius:5px; -webkit-border-radius:5px; }
+.msg-info { background:#ADC2F7 6px center no-repeat; border:1px solid #6D94F7; color:#03C; }
+.msg-atten { background:#FAE673 6px center no-repeat; border:1px solid #FEBD63; color:#C60; }
+.msg-ok { background:#AEE893 6px center no-repeat; border:1px solid #8EC46C; color:#060; }
+.msg-error { background:#F4B8B5 6px center no-repeat; border:1px solid #C94042; color:#900; }
+/* END OF MESSAGES */
