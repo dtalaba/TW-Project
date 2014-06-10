@@ -9,29 +9,36 @@ if(logged_in()) {header('Location: '.$BASE_URL.'admin');}
 <link rel="stylesheet" href="<?php print $BASE_URL;?>assets/css/style.css" type="text/css" />
 </head>
 <body>
-<div class="container">
-	<div class="page-wrap">
-		<div class="content">
-		
+<sectio>
 		<?php 
 		if(isset($_POST['submit'])) {
 			login($_POST['username'], $_POST['password']);
 		}
 		?>
- 
-<div id="login">
-	<p><?php echo messages();?></p>        
-	<form method="post" action="">
-	<p><label><strong>Username</strong><input type="text" name="username" /></label></p>
-	<p><label><strong>Password</strong><input type="password" name="password" /></label></p>
-	<p><br /><input type="submit" name="submit" class="button" value="login" /></p>                       
-	</form>	  	  
-</div>
-		
-		</div>	
+	 
+		<div class="login-wrapper">
+			<p><?php echo messages();?></p>  
+			<div class="content box">
+				<h1>Log in</h1>
+				<form action="" method="post" id="login">
+					<label for="username">User:</label>
+					<input type="text" name="username" id="username" class="box" placeholder="dan@yahoo.com"/>
+					<label for="password">Parola:</label>
+					<input type="password" name="password" id="password" class="box" placeholder="****************"/>
+					<p class="remember-username">
+						<input type="checkbox" name="remember-me" id="remember-me">
+						<label for="remember-me">Tine-ma minte !</label>
+					</p>
+					<button type="submit" name="submit">Login</button>
+				</form>
+				<hr>
+				<p class="footer-links signup">N-ai cont? <a href="singup.php">Inregistreaza-te!</a></p>
+			</div>
+		</div>
+			
+	 
 		<div class="clear"></div>		
-	</div>
 <div class="footer">&copy; <?php echo SITETITLE.' '. date('Y');?> </div>	
-</div>
+</section>
 </body>
 </html>

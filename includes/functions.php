@@ -7,7 +7,7 @@ die('Nu ai acces la acest fisier!');
 //log user in 
 
 function login($user, $pass){
- 
+  $BASE_URL = 'http://localhost/tw/proiect/';
    //strip all tags from varible   
    $user = strip_tags(mysql_real_escape_string($user));
    $pass = strip_tags(mysql_real_escape_string($pass));
@@ -15,25 +15,52 @@ function login($user, $pass){
    $pass = md5($pass);
  
    // check if the user id and password combination exist in database
-   $sql = "SELECT * FROM members WHERE username = '$user' AND password = '$pass'";
+   $sql = "SELECT * FROM users WHERE username = '$user' AND password = '$pass'";
    $result = mysql_query($sql) or die('A aparut o eroare la interogare: ' . mysql_error());
-      
+    $row = mysql_fetch_object($result);  
    if (mysql_num_rows($result) == 1) {
-      // daca username si parola is ok se seteaza sesiunea
+    // daca username si parola is ok se seteaza sesiunea
 	  $_SESSION['authorized'] = true;
-					  
+		$_SESSION['username'] = $user;	
+    $_SESSION['id_user'] = $row->id;	  	  
 	  // direct catre admin
-      header('Location: '.$BASE_URL.'admin');
+    header('Location: '.$BASE_URL.'admin');
 	  exit();
    } else {
 	// eroare
 	$_SESSION['error'] = 'Ai introdus parola sau username gresit !';
    }
 }
- 
+
+function singup($user){
+  
+   $user = strip_tags(mysql_real_escape_string($user));
+  
+
+   $sql = "SELECT * FROM users WHERE username = '$user'";
+   $result = mysql_query($sql) or die('A aparut o eroare la interogare: ' . mysql_error());
+   $row = mysql_fetch_object($result);  
+       if (mysql_num_rows($result) == 1) {
+           $_SESSION['error'] = 'Userul este deja in baza de date !';
+         }
+         else {return 1;}    
+}
+
+ function verif_contact($telefon){
+  
+   $telefon = strip_tags(mysql_real_escape_string($telefon));
+
+   $sql = "SELECT * FROM contacts WHERE telefon = '$telefon'";
+   $result = mysql_query($sql) or die('A aparut o eroare la interogare: ' . mysql_error());
+   $row = mysql_fetch_object($result);  
+       if (mysql_num_rows($result) == 1) {
+           $_SESSION['error'] = 'Contactul este deja in baza de date !';
+         }
+         else {return 1;}    
+}
 // autentificare
 function logged_in() {
-	if($_SESSION['authorized'] == true){
+	if(isset($_SESSION['authorized']) == true){
 		return true;
 	} else {
 		return false;
@@ -94,5 +121,35 @@ function GetImageExtension($imagetype)
 
      }
 
- 
+function is_valid_type($file)
+{
+  // This is an array that holds all the valid image MIME types
+  $valid_types = array("image/jpg", "image/jpeg", "image/bmp", "image/gif");
+
+  if (in_array($file['type'], $valid_types))
+    return 1;
+  return 0;
+}
+
+function export_csv($results, $name = NULL){
+  if(!$name)
+    {
+        $name = md5(uniqid() . microtime(TRUE) . mt_rand()). '.csv';
+    }
+
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename='. $name);
+    header('Pragma: no-cache');
+    header("Expires: 0");
+
+    $outstream = fopen("php://output", "w");
+
+    foreach($results as $result)
+    {
+        fputcsv($outstream, $result);
+    }
+
+    fclose($outstream);
+}
+
 ?>

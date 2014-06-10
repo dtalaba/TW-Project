@@ -133,7 +133,6 @@ body{
 /*** CONTAINER***/		
 
 	.container{
-		background-color: #d9dcde;;
 		width: 75%;
 		float:right;
 	}
@@ -168,13 +167,24 @@ body{
 		#search input[type="text"]:focus {
 		    width: 200px;
 		    }
-		
+		#search input[type="submit"]{
+			background: #444;
+			color:#e3e3e3;
+			border:0;
+			text-align: center;
+			-webkit-border-radius: 20px;
+		    -moz-border-radius: 20px;
+		    border-radius: 20px;
+		    font: bold 12px Arial,Helvetica,Sans-serif;
+		    padding: 6px 15px;
+		    cursor:pointer;
+		}
 		.sub-container{
 			text-align: center;
 		}
 		.contact-element{
-			width:200px;
-			height: 177px;
+			width:250px;
+			height: 200px;
 			border-radius: 4px;
 			opacity: 0.6; 
     		filter: alpha(opacity=60);
@@ -245,6 +255,88 @@ body{
 			}
 			 ***/
 
+/*** Login page ***/
+ 
+.login-wrapper{ 
+	width:340px; 
+	margin:100px auto; 
+}
+.login-wrapper .logo{ 
+	display:block; 
+	margin:0 59px 47px 59px; 
+}
+.login-wrapper .content{ 
+	padding:20px 20px 14px 20px; 
+	background:#f1f1f1;
+	}
+	.login-wrapper h1{ 
+		color:#006fa8; 
+		font-size:18px; 
+		font-family: sans-serif;
+		font-weight:bold; 
+		margin:0 0 15px 110px; 
+	}
+
+	.login-wrapper label{ 
+		display:block; 
+		margin:0 0 10px 0; 
+		cursor:pointer; 
+		font-size: 12px;
+		font-weight: 600;
+		font-family: serif;
+	}
+	.login-wrapper .footer-links{
+		font-size: 12px;
+		font-weight: 600;
+		font-family: serif;
+	}
+	.login-wrapper input[type="text"], .login-wrapper input[type="password"]{ 
+		margin:0 0 20px 0; 
+		width:100%; 
+		font-size:14px; 
+		line-height:1; 
+		padding:9px 5px; 
+		border:1px solid #dcdcdc; 
+		box-shadow:1px 1px 0 #eee inset, 1px 1px 0 #fff; 
+	}
+	.login-wrapper input:hover, .login-wrapper input:focus{
+		outline:0;  
+	}
+	
+	.remember-username{ 
+		overflow:hidden; 
+		margin-bottom:18px; 
+	}
+	.remember-username label{ 
+		float:left; margin:0 0 0 5px; 
+		line-height:13px; 
+	}
+	
+	.login-wrapper input[type="checkbox"]{ 
+		float:left; 
+		margin:0; 
+		padding:0; 
+	}
+	.login-wrapper button[type="submit"]{ 
+		font-family: sans-serif; 
+		font-size:13px; 
+		line-height:1em; 
+		color:#fff; font-weight:bold;
+		 text-align:center; 
+		 padding:13px 40px 12px; 
+		 border:0; 
+		 margin:0 0 0 90px;
+		 outline:0; 
+		 cursor:pointer; 
+		background: rgb(114,182,64);
+		background: -moz-linear-gradient(top,  rgba(114,182,64,1) 0%, rgba(91,164,37,1) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(114,182,64,1)), color-stop(100%,rgba(91,164,37,1)));
+		background: -webkit-linear-gradient(top,  rgba(114,182,64,1) 0%,rgba(91,164,37,1) 100%);
+		background: -o-linear-gradient(top,  rgba(114,182,64,1) 0%,rgba(91,164,37,1) 100%);
+		background: -ms-linear-gradient(top,  rgba(114,182,64,1) 0%,rgba(91,164,37,1) 100%);
+		background: linear-gradient(to bottom,  rgba(114,182,64,1) 0%,rgba(91,164,37,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#72b640', endColorstr='#5ba425',GradientType=0 );
+	}
 
 /*** ADD CONTACT ***/
 
@@ -267,7 +359,7 @@ body{
 	font-size: 15px;
 }
 .sub-container input[type="text"]{
-	background: no-repeat 10px 6px #fff;
+	background: no-repeat 10px 6px #16a085;
     border: 0 none;
     font: bold 12px Arial,Helvetica,Sans-serif;
     color: #000;
@@ -284,9 +376,33 @@ body{
 }
 /* MESSAGES */
 .hidethis { cursor:pointer; }
-.msg-info, .msg-atten, .msg-ok, .msg-error { margin:3px 0; padding:10px 10px 10px 40px; -moz-border-radius:5px; -webkit-border-radius:5px; }
-.msg-info { background:#ADC2F7 6px center no-repeat; border:1px solid #6D94F7; color:#03C; }
-.msg-atten { background:#FAE673 6px center no-repeat; border:1px solid #FEBD63; color:#C60; }
-.msg-ok { background:#AEE893 6px center no-repeat; border:1px solid #8EC46C; color:#060; }
-.msg-error { background:#F4B8B5 6px center no-repeat; border:1px solid #C94042; color:#900; }
-/* END OF MESSAGES */
+.msg-info, .msg-atten, .msg-ok, .msg-error { 
+	margin:3px 0; 
+	padding:10px 10px 10px 40px; 
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px; 
+}
+.msg-info { 
+	background:#ADC2F7 6px center no-repeat; 
+	border:1px solid #6D94F7; color:#03C; 
+}
+.msg-atten { 
+	background:#FAE673 6px center no-repeat; 
+	border:1px solid #FEBD63; 
+	color:#C60; 
+}
+.msg-ok { 
+	background:#AEE893 6px center no-repeat; 
+	border:1px solid #8EC46C; color:#060; 
+}
+.msg-error { 
+	background:#F4B8B5 6px center no-repeat; 
+	border:1px solid #C94042; 
+	color:#900; 
+}
+
+/*** Footer ***/
+.footer{
+	text-align: center;
+}
+

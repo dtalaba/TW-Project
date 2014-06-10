@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Onco</title>
+	<title><?php echo SITETITLE;?></title>
 
 	<link rel="stylesheet" type="text/css" href="<?php print $BASE_URL;?>assets/css/style.css">
  
@@ -41,14 +41,18 @@ if(isset($_POST['submit'])){
 
 <section class="main-content">
 	<section class="sidebar">
-		<h1>ONCO</h1>
+		<h1><?php echo SITETITLE;?></h1>
 		<div class="user">
 			<div class="user-img">
-				<img src="assets/images/no-pic-avatar.png" alt="" />
+				<img src="<?php print $BASE_URL;?>assets/images/no-pic-avatar.png" alt="" />
 			</div> <!-- user-img -->
 			<div class="user-details">
 				<p>Welcome, </p>
-				<span>admin</span>
+				<span><?php
+				if(isset($_SESSION['username'])) print $_SESSION['username'];
+				//if(isset($_SESSION['id_user'])) print $_SESSION['id_user'];
+
+				?></span>
 				<a href="<?php print $BASE_URL;?>admin?logout">Logout</a>
 			</div> <!-- end user-details -->
 		</div> <!-- end user -->
@@ -56,11 +60,10 @@ if(isset($_POST['submit'])){
 		<ul>
 			<li><a href="<?php print $BASE_URL;?>admin/">Home</a></li>
 			<li><a href="<?php print $BASE_URL;?>admin/addcontact.php">Add Contact</a></li>
-		</ul>
+			<li><a href="<?php print $BASE_URL;?>admin/export.php">Export</a></li>
 	</section> <!-- end sidebar -->
 	<section class="container">
-		<h1>Edit Page</h1>
-	 
+		
 		<?php
 		$id = $_GET['id'];
 		$id = mysql_real_escape_string($id);
@@ -69,11 +72,19 @@ if(isset($_POST['submit'])){
 
 		?>
 		<header>
-			<form method="get" action="/search" id="search">
-			  	<input name="q" type="text" size="40" placeholder="Search..." />
+			<form name="search" method="post" id="search" action="search.php">
+				 <input type="text" name="find" placeholder="Cauta" /> in 
+				 <select name="field" onchange="if (this.value) window.location.href=?this.value">
+				 <option value="nume">Nume</option>
+				 <option value="prenume">Prenume</option>
+				 <option value="telefon">Telefon</option>
+				 </select>
+				 <input type="hidden" name="searching" value="yes" />
+				 <input type="submit" name="search" value="Search" />
 			</form>
 		</header>
 		<div class="sub-container">
+			<h1>Edit Page</h1>
 			<div class="add-contact">
 			    <form method="post" action="">
 			    	<label for="nume">Nume</label>

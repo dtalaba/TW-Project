@@ -1,26 +1,7 @@
 <?php require('../includes/config.php'); 
- 
-//daca utillizatorul nu este logat va fi redirectionat catre pagina de login
-login_required();
- 
-//if logout has been clicked run the logout function which will destroy any active sessions and redirect to the login page
-if(isset($_GET['logout'])){
-	logout();
-}
- 
-//run if a page deletion has been requested
-if(isset($_GET['delpage'])){
-		
-	$delpage = $_GET['delpage'];
-	$delpage = mysql_real_escape_string($delpage);
-	$sql = mysql_query("DELETE FROM contacts WHERE id_contact = '$delpage'");
-    $_SESSION['success'] = "Contact sters"; 
-    header('Location: '.$BASE_URL.'admin');
-   	exit();
-}
+	  include('../includes/export.php');
  
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,16 +10,7 @@ if(isset($_GET['delpage'])){
 	<title><?php echo SITETITLE;?></title>
 
 	<link rel="stylesheet" type="text/css" href="<?php print $BASE_URL;?>assets/css/style.css">
-
-	<script language="JavaScript" type="text/javascript">
-	function delpage(id)
-	{
-	   if (confirm("Sunteti sigur ca doriti sa stergeti contactul ?"))
-	   {
-		  window.location.href = '<?php print $BASE_URL;?>admin?delpage=' + id;
-	   }
-	}
-</script>
+ 
 </head>
 <body>
 
@@ -64,7 +36,6 @@ if(isset($_GET['delpage'])){
 			<li><a href="<?php print $BASE_URL;?>admin/">Home</a></li>
 			<li><a href="<?php print $BASE_URL;?>admin/addcontact.php">Add Contact</a></li>
 			<li><a href="<?php print $BASE_URL;?>admin/export.php">Export</a></li>
-		</ul>
 	</section> <!-- end sidebar -->
 	<section class="container">
 		<header>
@@ -80,36 +51,54 @@ if(isset($_GET['delpage'])){
 			</form>
 		</header>
 		<div class="sub-container">
-		<?php 
-		 
-			//show any messages if there are any.
-			messages();
-			$id_user = $_SESSION['id_user']; 
-			$data = mysql_query("SELECT * FROM contacts WHERE id_user=$id_user ORDER BY id_contact");
+			<h1>Export</h1>
+			<div class="add-contact">
+				<?php
+			    $query = mysql_query("SELECT * FROM contacts");
+				 
+				
 
-			while($row = mysql_fetch_object($data)) 
-			{
+				/*echo '<pre>';
+				print_r($data);
+				echo '</pre>';
+				$export = new H_Mysql_Export();
+				$export->headerAry = array('Nume','Prenume','Email','Telefon');	// TABLE COLUMN NAMES
+				$export->dataAry = $data;					// TABLE DATA ARRAY FROM MYSQL
+				$export->filename = 'CSV';					// CUSTOM FILE NAME 
+				$export->directory = 'localhost/tw/proiect/files/';					// DIRECTORY NAME
+				$export->csv(); 				 
+				*/
 
-				echo "<div class='contact-element'>";
-					echo "<a href=javascript:delpage('$row->id_contact');><button class='delete'>X</button></a>";
-					echo "<a href='editcontact.php?id=$row->id_contact'>";
-						echo "<h2>$row->nume $row->prenume</h2>";
-						echo"<img src='http://localhost/tw/proiect/assets/images/$row->picture' alt='' />";
-						//echo"<p>Nume : $row->nume</p>";
-						//echo"<p>Prenume : $row->prenume</p>";
-						echo"<p>Email : $row->email</p>";
-						echo"<p>Telefon : $row->telefon</p>";
-						echo"<p>Adresa : $row->adresa</p>";
-						echo"<p>Hobby : $row->hobby</p>";
-					echo"</a>";
-				echo"</div> <!-- contact-element -->";
-			
-			}
-		?>
+				// Pick a filename and destination directory for the file
+				// Remember that the folder where you want to write the file has to be writable
+				$filename = "http://localhost/tw/proiect/files/db_user_export_".time().".csv";
+				 
+				// Actually create the file
+				// The w+ parameter will wipe out and overwrite any existing file with the same name
+				$handle = fopen($filename, 'w+');
+				 
+				// Write the spreadsheet column titles / labels
+				fputcsv($handle, array('Username','Email'));
+				 
+				// Write all the user records to the spreadsheet
+				foreach($query as $row)
+				{
+				    fputcsv($handle, array($row['username'], $row['email']));
+				}
+				 
+				// Finish writing the file
+				fclose($handle);
+ 	 
+				?>
+			</div> <!-- end add-contact -->
+
 		</div> <!-- end sub-container -->
 	</section> <!-- end container -->
-</section> <!-- end main-content -->
-
-
+</section> <!-- end main-content --> 
+<div id="footer">	
+		<div class="copy">&copy; <?php echo SITETITLE.' '. date('Y');?> </div>
+</div><!-- close footer -->
+</div><!-- close wrapper -->
+ 
 </body>
 </html>
